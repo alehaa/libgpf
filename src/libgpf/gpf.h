@@ -1,7 +1,7 @@
-/* This file is part of SelnexGPF.
+/* This file is part of libGPF.
  *
- * SelnexGPF is free software: you can redistribute it and/or modify it under
- * the terms of the GNU Lesser General Public License as published by the Free
+ * libGPF is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option)
  * any later version.
  *
@@ -27,8 +27,8 @@
  */
 
 
-#ifndef SELNEXGPF_DECODE_H
-#define SELNEXGPF_DECODE_H
+#ifndef LIBGPF_H
+#define LIBGPF_H
 
 #include <time.h>
 #include <stdint.h>
