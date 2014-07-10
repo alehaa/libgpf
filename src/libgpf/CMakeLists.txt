@@ -22,10 +22,19 @@
 set (CMAKE_C_FLAGS "-std=c99")
 
 
+# build library
 add_library(gpf SHARED
 	gpf.c
 )
 
+set_target_properties(gpf PROPERTIES
+	VERSION 1.0.0
+	SOVERSION 1
+)
+
+
+# install library
 install(TARGETS gpf DESTINATION lib)
 
+# install header
 install(FILES gpf.h DESTINATION include)
