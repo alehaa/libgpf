@@ -26,7 +26,7 @@ cmake_minimum_required(VERSION 2.8)
 #
 # project information
 #
-project("SelnexGPF")
+project("libGPF")
 
 
 #
@@ -34,10 +34,3 @@ project("SelnexGPF")
 #
 add_subdirectory(doc)
 add_subdirectory(src)
-
-
-#
-# testing functionality
-#
-enable_testing()
-add_subdirectory(tests)
