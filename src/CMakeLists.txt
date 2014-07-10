@@ -20,4 +20,5 @@
 
 
 # recurse into subdirectories
-add_subdirectory(sel2gpf)
+add_subdirectory(libgpf)
+add_subdirectory(gpfview)

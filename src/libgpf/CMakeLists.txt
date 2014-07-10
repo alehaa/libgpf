@@ -18,10 +18,14 @@
 #   2013-2014 Alexander Haase <alexander.haase@rwth-aachen.de>
 #
 
-add_library(selnexgpf SHARED
-	selnexgpf.c
+# set C99 standard
+set (CMAKE_C_FLAGS "-std=c99")
+
+
+add_library(gpf SHARED
+	gpf.c
 )
 
-install(TARGETS selnexgpf DESTINATION lib)
+install(TARGETS gpf DESTINATION lib)
 
-install(FILES selnexgpf.h DESTINATION include)
+install(FILES gpf.h DESTINATION include)

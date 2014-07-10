@@ -22,10 +22,10 @@
 set (CMAKE_C_FLAGS "-std=c99")
 
 # include selnexgpf library header
-include_directories("${PROJECT_SOURCE_DIR}/src/libdecode")
+include_directories("${PROJECT_SOURCE_DIR}/src/libgpf")
 
-add_executable (sel2gpf
-	sel2gpf.c
+add_executable (gpfview
+	gpfview.c
 )
 
-target_link_libraries(sel2gpf selnexgpf)
+target_link_libraries(gpfview gpf)
