@@ -18,7 +18,12 @@
  *  2014 Alexander Haase <alexander.haase@rwth-aachen.de>
  */
 
-/** \brief Application to decode an .llv file
+/** \file
+ *
+ * \brief Application to view contents of an *.gpf file.
+ *
+ * \details This application shows the contents of an *.gpf file. All entrys for
+ *  a waypoint will be shown in one line.
  *
  *
  * \copyright 2014 Alexander Haase <alexander.haase@rwth-aachen.de>
@@ -36,6 +41,9 @@
 #include <gpf.h>
 
 
+/** \brief Main loop function
+ *
+ */
 int main (int argc, char **argv)
 {
 	if (argc != 2) {

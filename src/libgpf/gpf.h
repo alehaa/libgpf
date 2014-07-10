@@ -18,7 +18,9 @@
  *  2014 Alexander Haase <alexander.haase@rwth-aachen.de>
  */
 
-/** \brief Library to decode selnex GPF-Files
+/** \file
+ *
+ * \brief Library to decode GPF-Files
  *
  *
  * \copyright 2014 Alexander Haase <alexander.haase@rwth-aachen.de>
@@ -56,7 +58,8 @@ typedef struct gpf_waypoint_s {
  	 * tracking device. 2^0 will be contact 0, 2^1 contact 1, etc. */
 } gpf_waypoint_t;
 
-/* \brief File handle for gpf-file.
+
+/** \brief File handle for gpf-file.
  */
 typedef FILE gpf_file_t;
 

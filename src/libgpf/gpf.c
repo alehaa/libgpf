@@ -18,6 +18,13 @@
  *  2014 Alexander Haase <alexander.haase@rwth-aachen.de>
  */
 
+/** \file
+ *
+ * \copyright 2014 Alexander Haase <alexander.haase@rwth-aachen.de>
+ *
+ * \date 10.07.2014
+ */
+
 #include "gpf.h"
 
 
