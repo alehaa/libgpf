@@ -38,7 +38,7 @@ if (DOXYGEN_FOUND)
 		add_custom_command (OUTPUT ${doxy_html_index_file}
 			COMMAND ${DOXYGEN_EXECUTABLE} ${doxyfile}
 			MAIN_DEPENDENCY ${doxyfile} ${doxyfile_in}
-			DEPENDS gpf gpfview
+			DEPENDS gpf gpfStatic gpfview
 			COMMENT "Generating documentation"
 		)
 

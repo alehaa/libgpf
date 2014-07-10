@@ -21,11 +21,14 @@
 # set C99 standard
 set (CMAKE_C_FLAGS "-std=c99")
 
-# include selnexgpf library header
+# include libgpf header
 include_directories("${PROJECT_SOURCE_DIR}/src/libgpf")
 
-add_executable (gpfview
-	gpfview.c
-)
+# add executable
+add_executable (gpfview gpfview.c)
 
+# link libgpf
 target_link_libraries(gpfview gpf)
+
+# install binary
+install(TARGETS gpfview DESTINATION bin)
