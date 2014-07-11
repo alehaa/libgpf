@@ -62,13 +62,7 @@ int main (int argc, char **argv)
 	// read data from file
 	int c;
 	gpf_waypoint_t wpoint;
-	while ((c = gpf_read(fh, &wpoint)) >= 0) {
-		// skip end of route
-		if (c == 0) {
-			printf("+++ End of path\n\n");
-			continue;
-		}
-
+	while ((c = gpf_read(fh, &wpoint)) > 0) {
 		// print
 		char timebuff[100];
 		strftime(timebuff, 100, "%c", &(wpoint.wp_time));
@@ -88,6 +82,9 @@ int main (int argc, char **argv)
 	// close file
 	gpf_close(fh);
 
-	if (c == -1) return EXIT_SUCCESS;
-	else return EXIT_FAILURE;
+	if (c == 0) return EXIT_SUCCESS;
+	else {
+		printf("An error occured: %s\n", strerror(errno));
+		return EXIT_FAILURE;
+	}
 }

@@ -52,8 +52,8 @@ gpf_file_t * gpf_open (const char *filename)
  * \param wp Pointer to the waypoint struct, where found data shouls be copied
  *  in.
  *
- * \return Returns 1 on success, 0 if end of route found, -1 if end of file
- *  reached and -2 if an error has occured.
+ * \return Returns 1 on success, 0 if end of file reached and -1 if an error has
+ *  occured.
  */
 int gpf_read (gpf_file_t *fh, gpf_waypoint_t *wp)
 {
@@ -70,9 +70,34 @@ int gpf_read (gpf_file_t *fh, gpf_waypoint_t *wp)
 	size_t buffer_size = 21;
 	unsigned char buffer[buffer_size];
 	if (fread(&buffer, sizeof(char), buffer_size, fh) != buffer_size) {
-		if (feof(fh)) return -1;
-		else return -2;
+		// end of file reached
+		if (feof(fh)) return 0;
+
+		// an error occured
+		else return -1;
 	}
+
+
+	/* is there a spacer element?
+	 *
+	 * Spacers (currently) have no specific pattern, but start with 255 and are
+	 * 6 bytes long. So buffer[6-8] must match "255 170 255". Then we have to
+	 * jump to this position and re-read the buffer.
+	 */
+	if (buffer[0] == 255 && (buffer[1] != 170 || buffer[2] != 255) && buffer[6] == 255 && buffer[7] == 170 && buffer[8] == 255) {
+		// jump to new position
+		fseek(fh, actual_pos + 6, SEEK_SET);
+
+		// re-read data into buffer
+		if (fread(&buffer, sizeof(char), buffer_size, fh) != buffer_size) {
+			// end of file reached
+			if (feof(fh)) return 0;
+
+			// an error occured
+			else return -1;
+		}
+	}
+
 
 	/* is content of buffer a waypoint?
 	 *
@@ -85,7 +110,7 @@ int gpf_read (gpf_file_t *fh, gpf_waypoint_t *wp)
 			checksum ^= buffer[i];
 
 		// validate checksum
-		if (checksum != buffer[20]) return -2;
+		if (checksum != buffer[20]) return -1;
 
 
 		// get time of waypoint
@@ -107,22 +132,14 @@ int gpf_read (gpf_file_t *fh, gpf_waypoint_t *wp)
 		// contacts
 		wp->wp_contacts = buffer[19];
 
+
 		// return match
 		return 1;
-
-	/* is there a route-end?
-	 *
-	 * Route ends have (currently) no specific pattern, but start with 255 and
-	 * are 6 bytes long. So buffer[6-8] must match "255 170 255". Then we have
-	 * to jump to this position for next iteration.
-	 */
-	} else if (buffer[0] == 255 && buffer[6] == 255 && buffer[7] == 170 && buffer[8] == 255) {
-		fseek(fh, actual_pos + 6, SEEK_SET);
-		return 0;
 	}
 
+
 	// an error occured
-	return -2;
+	return -1;
 }
 
 
