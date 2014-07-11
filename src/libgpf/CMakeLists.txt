@@ -22,7 +22,7 @@
 set (CMAKE_C_FLAGS "-std=c99")
 
 
-# build shared library
+# build & install shared library
 add_library(gpf SHARED gpf.c)
 
 set_target_properties(gpf PROPERTIES
@@ -30,16 +30,26 @@ set_target_properties(gpf PROPERTIES
 	SOVERSION 1
 )
 
+install(TARGETS gpf DESTINATION lib)
 
-# build static library
+
+# build & install static library
 add_library(gpfStatic STATIC gpf.c)
 
-set_target_properties(gpfStatic PROPERTIES OUTPUT_NAME gpf)
+set_target_properties(gpfStatic PROPERTIES
+	OUTPUT_NAME gpf
+)
 
-
-# install library
-install(TARGETS gpf DESTINATION lib)
 install(TARGETS gpfStatic DESTINATION lib)
+
 
 # install header
 install(FILES gpf.h DESTINATION include)
+
+
+# generate & install pkg-config
+get_target_property(LIBGPF_VERSION gpf VERSION)
+
+configure_file(gpf.pc.in ${CMAKE_CURRENT_BINARY_DIR}/gpf.pc @ONLY)
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/gpf.pc DESTINATION "/usr/share/pkgconfig")
