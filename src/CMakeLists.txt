@@ -22,3 +22,4 @@
 # recurse into subdirectories
 add_subdirectory(libgpf)
 add_subdirectory(gpfview)
+add_subdirectory(gpf2csv)

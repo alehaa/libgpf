@@ -53,7 +53,7 @@ int main (int argc, char **argv)
 
 
 	// open file
-	gpf_file_t *fh = gpf_open(argv[1]);
+	FILE *fh = fopen(argv[1], "r");
 	if (fh == NULL) {
 		fprintf(stderr, "Error opening file: %s\n", strerror(errno));
 		exit(EXIT_FAILURE);
@@ -80,7 +80,7 @@ int main (int argc, char **argv)
 	}
 
 	// close file
-	gpf_close(fh);
+	fclose(fh);
 
 	if (c == 0) return EXIT_SUCCESS;
 	else {

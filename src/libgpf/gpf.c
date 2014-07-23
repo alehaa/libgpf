@@ -25,24 +25,9 @@
  * \date 10.07.2014
  */
 
+#include <stdio.h>
+
 #include "gpf.h"
-
-
-/** \brief Opens file \p filename.
- *
- *
- * \param filename File to be opened.
- *
- * \return If the file is successfully opened, the function returns a pointer to#
- *  a FILE object that can be used to identify the stream on future operations.
- *  Otherwise, a null pointer is returned.
- *  On most library implementations, the errno variable is also set to a system-
- *  specific error code on failure.
- */
-gpf_file_t * gpf_open (const char *filename)
-{
-	return fopen(filename, "r");;
-}
 
 
 /** \brief Get next waypoint in file.
@@ -55,7 +40,7 @@ gpf_file_t * gpf_open (const char *filename)
  * \return Returns 1 on success, 0 if end of file reached and -1 if an error has
  *  occured.
  */
-int gpf_read (gpf_file_t *fh, gpf_waypoint_t *wp)
+int gpf_read (FILE *fh, gpf_waypoint_t *wp)
 {
 	/* get actual position in fh, for if it will be neccesary to jump back to
 	 * this position (or a position relative to this) */
@@ -140,19 +125,4 @@ int gpf_read (gpf_file_t *fh, gpf_waypoint_t *wp)
 
 	// an error occured
 	return -1;
-}
-
-
-/** \brief Closes the file associated with the stream and disassociates it.
- *
- *
- * \param fh Pointer to a \ref gpf_file_t object that specifies the stream to be
- *  closed.
- *
- * \return If the stream is successfully closed, a zero value is returned.
- *  On failure, EOF is returned.
- */
-int gpf_close (gpf_file_t *fh)
-{
-	return fclose(fh);
 }

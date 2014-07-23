@@ -34,7 +34,6 @@
 
 #include <time.h>
 #include <stdint.h>
-#include <stdio.h>
 
 
 /** \brief Struct that stores all information about one specific waypoint
@@ -51,7 +50,7 @@ typedef struct gpf_waypoint_s {
 	/**< Longitude of this waypoint */
 
 	float wp_velocity;
-	/**< Velocity of tracking-device at this waypoiint */
+	/**< Velocity of tracking-device at this waypoint */
 
 	uint8_t wp_contacts;
 	/**< Integer that contains bitwise the state of the four contacts of the
@@ -59,19 +58,10 @@ typedef struct gpf_waypoint_s {
 } gpf_waypoint_t;
 
 
-/** \brief File handle for gpf-file.
- */
-typedef FILE gpf_file_t;
-
-
-
 /*
  * functions
  */
-gpf_file_t * gpf_open (const char *filename);
+int gpf_read (FILE *fh, gpf_waypoint_t *wp);
 
-int gpf_read (gpf_file_t *fh, gpf_waypoint_t *wp);
-
-int gpf_close (gpf_file_t *fh);
 
 #endif
